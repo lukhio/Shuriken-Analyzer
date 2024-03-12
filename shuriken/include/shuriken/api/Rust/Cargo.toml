@@ -9,6 +9,3 @@ edition = "2021"
 
 [build-dependencies]
 bindgen = "0.69.4"
-
-# [env]
-# LIB_LINK_SEARCH = "/home/jgamba/dev/Shuriken-Analyzer/build/shuriken/"

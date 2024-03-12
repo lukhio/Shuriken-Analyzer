@@ -1,13 +1,14 @@
 use std::env;
 use std::path::PathBuf;
 
+const BASE_FOLDER: &str = "/home/jgamba/dev/Shuriken-Analyzer/build/shuriken/";
+
 fn main() {
     // Tell cargo to look for shared libraries in the specified directory
-    // println!("cargo:rustc-link-search={}", env::var("LIB_LINK_SEARCH").unwrap());
-    println!("cargo:rustc-link-search=/home/jgamba/dev/Shuriken-Analyzer/build/shuriken/");
+    println!("cargo:rustc-link-search={}", BASE_FOLDER);
 
     // Tell cargo where to look for the shared object when running the program
-    println!("cargo:rustc-env=LD_LIBRARY_PATH=/home/jgamba/dev/Shuriken-Analyzer/build/shuriken/");
+    println!("cargo:rustc-env=LD_LIBRARY_PATH={}", BASE_FOLDER);
 
     // Tell cargo to tell rustc to link the shuriken lib
     println!("cargo:rustc-link-lib=shuriken");
@@ -22,7 +23,6 @@ fn main() {
         .clang_arg("-std=c++17")
         .clang_arg("-x")
         .clang_arg("c++")
-        // .clang_args(&["-std=c++17"])
         // Tell cargo to invalidate the built crate whenever any of the
         // included header files changed.
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
