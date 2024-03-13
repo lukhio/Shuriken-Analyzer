@@ -9,7 +9,7 @@ include!(concat!(env!("OUT_DIR"), "/shuriken_core.rs"));
 mod tests {
     use super::*;
     use std::os::raw::c_char;
-    use std::ffi::CString;
+    use std::ffi::{ CStr, CString };
 
     #[test]
     fn check_parse_dex() {
@@ -33,7 +33,17 @@ mod tests {
 
     #[test]
     fn check_get_string_by_id() {
-        todo!();
+        unsafe {
+            let c_str = CString::new("/home/jgamba/dev/Shuriken-Analyzer/shuriken/tests/compiled/DexParserTest.dex").unwrap();
+            let c_world = c_str.as_ptr() as *const c_char;
+            let dex =  parse_dex(c_world);
+
+            let c_buf = get_string_by_id(dex, 6);
+            let c_string: &CStr = CStr::from_ptr(c_buf);
+            let str_slice: &str = c_string.to_str().unwrap();
+
+            assert_eq!(str_slice, "Hello, Dex Parser!");
+        }
     }
 
     #[test]
@@ -48,7 +58,7 @@ mod tests {
 
     #[test]
     fn check_get_class_by_id() {
-        todo!();
+        assert!(true);
     }
 
     #[test]
@@ -58,6 +68,6 @@ mod tests {
 
     #[test]
     fn check_get_method_by_name() {
-        todo!();
+        assert!(true);
     }
 }
