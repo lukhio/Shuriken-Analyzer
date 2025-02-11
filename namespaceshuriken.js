@@ -7,9 +7,9 @@ var namespaceshuriken =
     [ "parser", "namespaceshuriken_1_1parser.html", "namespaceshuriken_1_1parser" ],
     [ "deref_iterator_range", "structshuriken_1_1deref__iterator__range.html", "structshuriken_1_1deref__iterator__range" ],
     [ "is_container_of_reference_wrapper", "structshuriken_1_1is__container__of__reference__wrapper.html", null ],
-    [ "is_container_of_reference_wrapper< T, std::void_t< typename T::value_type > >", "structshuriken_1_1is__container__of__reference__wrapper.html", null ],
+    [ "is_container_of_reference_wrapper< T, std::void_t< typename T::value_type > >", "structshuriken_1_1is__container__of__reference__wrapper_3_01T_00_01std_1_1void__t_3_01typename_01T_1_1value__type_01_4_01_4.html", null ],
     [ "is_reference_wrapper", "structshuriken_1_1is__reference__wrapper.html", null ],
-    [ "is_reference_wrapper< std::reference_wrapper< U > >", "structshuriken_1_1is__reference__wrapper.html", null ],
+    [ "is_reference_wrapper< std::reference_wrapper< U > >", "structshuriken_1_1is__reference__wrapper_3_01std_1_1reference__wrapper_3_01U_01_4_01_4.html", null ],
     [ "iterator_range", "classshuriken_1_1iterator__range.html", "classshuriken_1_1iterator__range" ],
     [ "Scoped", "classshuriken_1_1Scoped.html", "classshuriken_1_1Scoped" ],
     [ "LEVEL", "namespaceshuriken.html#ad6077f094241bc295b3b90992a34159e", [
