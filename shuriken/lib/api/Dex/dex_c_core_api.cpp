@@ -300,6 +300,38 @@ namespace {
         hdvmclassanalysis_t *get_class_analysis(dex_opaque_struct_t *opaque_struct,
                                                 ClassAnalysis *classAnalysis);
 
+        /// @brief get a deaheader_t structure for the given DEX file
+        dexheader_t *get_header(dex_opaque_struct_t *opaque_struct) {
+            dexheader_t *dex_header = new dexheader_t{};
+            auto encoded_header = opaque_struct->parser->get_header().get_dex_header();
+
+            memcpy(dex_header->magic, encoded_header.magic, 8);
+            dex_header->checksum = encoded_header.checksum;
+            memcpy(dex_header->signature, encoded_header.signature, 20);
+            dex_header->file_size = encoded_header.file_size;
+            dex_header->header_size = encoded_header.header_size;
+            dex_header->endian_tag = encoded_header.endian_tag;
+            dex_header->link_size = encoded_header.link_size;
+            dex_header->link_off = encoded_header.link_off;
+            dex_header->map_off = encoded_header.map_off;
+            dex_header->string_ids_size = encoded_header.string_ids_size;
+            dex_header->string_ids_off = encoded_header.string_ids_off;
+            dex_header->type_ids_size = encoded_header.type_ids_size;
+            dex_header->type_ids_off = encoded_header.type_ids_off;
+            dex_header->proto_ids_size = encoded_header.proto_ids_size;
+            dex_header->proto_ids_off = encoded_header.proto_ids_off;
+            dex_header->field_ids_size = encoded_header.field_ids_size;
+            dex_header->field_ids_off = encoded_header.field_ids_off;
+            dex_header->method_ids_size = encoded_header.method_ids_size;
+            dex_header->method_ids_off = encoded_header.method_ids_off;
+            dex_header->class_defs_size = encoded_header.class_defs_size;
+            dex_header->class_defs_off = encoded_header.class_defs_off;
+            dex_header->data_size = encoded_header.data_size;
+            dex_header->data_off = encoded_header.data_off;
+
+            return dex_header;
+        }
+
         /// @brief get or create a hdvmfieldanalysis_t structure given a FieldAnalysis object
         hdvmfieldanalysis_t *get_field_analysis(dex_opaque_struct_t *opaque_struct,
                                                 FieldAnalysis *fieldAnalysis) {
@@ -715,6 +747,12 @@ void destroy_dex(hDexContext context) {
     auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
     if (!opaque_struct || opaque_struct->tag != DEX_TAG) return;
     ::destroyers::destroy_opaque_struct(opaque_struct);
+}
+
+dexheader_t *get_header(hDexContext context) {
+    auto *opaque_struct = reinterpret_cast<dex_opaque_struct_t *>(context);
+    if (!opaque_struct || opaque_struct->tag != DEX_TAG) return nullptr;
+    return ::getters::get_header(opaque_struct);
 }
 
 size_t get_number_of_strings(hDexContext context) {
